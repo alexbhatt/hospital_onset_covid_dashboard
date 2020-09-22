@@ -20,7 +20,8 @@ library(DT, warn.conflicts = FALSE)
 
 ## load data
 data_s3_bucket <- "https://coronavirus-hospital-onset-data.s3.eu-west-2.amazonaws.com/ho_covid_wk_counts.csv"
-hcai <- readr::read_csv(data_s3_bucket, col_types = cols())
+gitlab_data <- url("https://gitlab.phe.gov.uk/alex.bhattacharya/covid-hospital-onset-dashboard/raw/master/app/data/covid_ho_data.csv")
+hcai <- readr::read_csv(gitlab_data, col_types = cols())
 
 #### UI AND NAV ELEMENTS ########################################################
 # Setting up modules
