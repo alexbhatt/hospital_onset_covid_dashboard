@@ -9,7 +9,7 @@ RUN set -ex; \
 		python3-minimal \
 	; \
 	find /var/lib/apt/lists -type f -delete;
-	
+
 # until we can figure out how to invoke sass during the build, make the www
 # directory writable so that the web server can compile the CSS when it starts
 # up.
@@ -20,7 +20,6 @@ USER docker
 RUN Rscript \
 	-e "install.packages('renv', repos = c(CRAN='https://cloud.r-project.org'))"
 
-
 WORKDIR /project
 
 COPY cgroup-limits renv.lock .
@@ -30,9 +29,6 @@ RUN ["/bin/bash", "-c", "set -ex; limit_vars=$(python3 cgroup-limits); declare $
 COPY app app
 
 EXPOSE 3838
-
-RUN Rscript \
-	-e "sass::sass(sass::sass_file('styles/main.scss'),output = 'www/main.css')"
 
 CMD ["/usr/bin/Rscript", "-e", "shiny::runApp('app', host = '0.0.0.0', port = 3838)"]
 

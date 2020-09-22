@@ -16,8 +16,8 @@
 .Rprofile
 
 # CSS as we want these compiled
-main.css
-govuk.css
+# main.css
+# govuk.css
 
 # RS connect files
 rsconnect/
