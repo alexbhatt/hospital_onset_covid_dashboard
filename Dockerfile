@@ -27,6 +27,11 @@ EXPOSE 3838
 
 CMD ["/usr/bin/Rscript", "-e", "shiny::runApp('app', host = '0.0.0.0', port = 3838)"]
 
+# until we can figure out how to invoke sass during the build, make the www
+# directory writable so that the web server can compile the CSS when it starts
+# up.
+RUN install -d -g root -m 0775 www
+
 # A numeric UID tells OpenShift that this container image doesn't require a
 # privileged Security Context Constraint in order to run.
 USER 1001
