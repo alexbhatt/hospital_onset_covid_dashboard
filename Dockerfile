@@ -10,11 +10,6 @@ RUN set -ex; \
 	; \
 	find /var/lib/apt/lists -type f -delete;
 
-# until we can figure out how to invoke sass during the build, make the www
-# directory writable so that the web server can compile the CSS when it starts
-# up.
-RUN install -d -g root -m 0775 /project/www
-
 USER docker
 
 RUN Rscript --verbose --vanilla \
@@ -27,6 +22,8 @@ COPY cgroup-limits renv.lock .
 RUN ["/bin/bash", "-c", "set -ex; limit_vars=$(python3 cgroup-limits); declare $limit_vars; MAKEFLAGS=-j${NUMBER_OF_CORES:-1} Rscript --verbose --vanilla -e 'options(renv.consent = TRUE, renv.settings.use.cache = FALSE)' -e 'renv::restore()'; rm -rf ~/.local/share/renv; rm -rf /usr/local/lib/R/site-library/*/{help,doc,include,tinytest}; find /usr/local/lib/R -name '*.so' -exec strip --strip-unneeded {} +"]
 
 COPY app app
+
+RUN ["/usr/bin/Rscript", "--verbose", "--vanilla", "-e", "sass::sass(sass::sass_file('app/styles/main.scss'), output = 'app/www/main.css')"]
 
 EXPOSE 3838
 
