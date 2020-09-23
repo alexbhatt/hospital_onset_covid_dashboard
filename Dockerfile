@@ -13,7 +13,7 @@ RUN set -ex; \
 # until we can figure out how to invoke sass during the build, make the www
 # directory writable so that the web server can compile the CSS when it starts
 # up.
-RUN install -d -g root -m 0775 www
+RUN install -d -g root -m 0775 /project/www
 
 USER docker
 
