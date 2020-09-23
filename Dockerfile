@@ -19,11 +19,22 @@ WORKDIR /project
 
 COPY cgroup-limits renv.lock .
 
-RUN ["/bin/bash", "-c", "set -ex; limit_vars=$(python3 cgroup-limits); declare $limit_vars; MAKEFLAGS=-j${NUMBER_OF_CORES:-1} Rscript --verbose --vanilla -e 'options(renv.consent = TRUE, renv.settings.use.cache = FALSE)' -e 'renv::restore()'; rm -rf ~/.local/share/renv; rm -rf /usr/local/lib/R/site-library/*/{help,doc,include,tinytest}; find /usr/local/lib/R -name '*.so' -exec strip --strip-unneeded {} +"]
+# Allows RUN scripts to use declare & brace expansion
+SHELL ["/bin/bash", "-c"]
+
+RUN set -eux; \
+	declare $(python3 cgroup-limits); \
+	MAKEFLAGS=-j${NUMBER_OF_CORES:-1} \
+		Rscript --verbose --vanilla \
+			-e 'options(renv.consent = TRUE, renv.settings.use.cache = FALSE)' -e 'renv::restore()'; \
+	rm -rf ~/.local/share/renv; \
+	rm -rf /usr/local/lib/R/site-library/*/{help,doc,include,tinytest}; \
+	find /usr/local/lib/R -name '*.so' -exec strip --strip-unneeded {} +
 
 COPY app app
 
-RUN ["/usr/bin/Rscript", "--verbose", "--vanilla", "-e", "sass::sass(sass::sass_file('app/styles/main.scss'), output = 'app/www/main.css')"]
+RUN Rscript --verbose --vanilla \
+	-e "sass::sass(sass::sass_file('app/styles/main.scss'), output = 'app/www/main.css')"
 
 EXPOSE 3838
 
