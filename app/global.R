@@ -64,6 +64,12 @@ font_style <- list(
   color = "black"
 )
 
+# SASS: CSS
+sass::sass(
+  sass::sass_file("styles/main.scss"),
+  output = "www/main.css"
+)
+
 
 #### PREP SOURCE DATA ###########################################################
 

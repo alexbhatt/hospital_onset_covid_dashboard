@@ -10,12 +10,6 @@
 function(input, output, session) {
   router(input, output, session)
 
-  # SASS
-  sass::sass(
-    sass::sass_file("styles/main.scss"),
-    output = "www/main.css"
-  )
-
   #### DASHBOARD DATA ###########################################################
   unfiltered <- reactive({
     ## filter dates always
