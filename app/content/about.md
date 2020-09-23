@@ -2,7 +2,7 @@
 
 ### Community-onset
 
-If a patient has a first positive test within 2 days of being admitted, the infection is counted as ‘community-onset’ (CO). This is because the patient almost certainly became infected before being admitted to hospital.
+If a patient has a first positive test 14 days before, or within 2 days of being admitted, the infection is counted as ‘community-onset’ (CO). This is because the patient almost certainly became infected before being admitted to hospital.
 
 ### Hospital-onset, indeterminate healthcare-associated
 
@@ -29,11 +29,12 @@ The NHS collects data on all hospital attendances and admissions. These data are
 
 ### Data changes
 
-Because of variation in reporting on a hospital level, data is subject to change, particularly in the most recent 6 weeks. This may result in changes to:
+Because of variation in reporting on a hospital level, data is subject to change, particularly in the most recent 3 months. This may result in changes to:
 
++ increases in the total number of linked cases
++ the proportions and distributions of hospital/community onset cases
 + the provider associated with the case
 + the hospital-onset infection category
-
 
 ## Data preparation and linkage
 
