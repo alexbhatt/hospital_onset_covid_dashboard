@@ -36,7 +36,7 @@ footer <- function(full = FALSE){
                   class="govuk-footer__inline-list-item",
                   tags$a(
                     class="govuk-footer__link js-gototop",
-                    href="https://gitlab.phe.gov.uk/alex.bhattacharya/covid-hospital-onset-dashboard/blob/master/app/data/covid_ho_data.csv",
+                    href="https://gitlab.phe.gov.uk/datalake-covid19/sgss-sus-linkage/raw/master/data/covid_ho_data.csv",
                     target="_blank",
                     "Download the data"
                   )
