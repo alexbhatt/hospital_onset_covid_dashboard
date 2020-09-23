@@ -13,7 +13,7 @@ banner <- function(inputId, type, label) {
         tags$span(
           class="govuk-phase-banner__text",
           HTML(label),
-          tags$strong("This dashboard is in development and all data is synthetic.")
+          tags$strong("This dashboard and all associated data is for internal-PHE use only.")
         )
       )
     )
