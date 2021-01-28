@@ -1,4 +1,4 @@
-FROM docker.io/rocker/r-base:4.0.2
+FROM docker.io/rocker/r-base:4.0.3
 
 RUN set -ex; \
 	apt-get -q update; \
