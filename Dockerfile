@@ -35,7 +35,9 @@ RUN set -eux; \
 	rm -rf /usr/local/lib/R/site-library/*/{help,doc,include,tinytest}; \
 	find /usr/local/lib/R -name '*.so' -exec strip --strip-unneeded {} +
 
-COPY app app
+# Without the chown, the files are owned by root. This seems to be a recent
+# change. I'm seeing it on Debian (podman 2.1.1+dfsg1-6) and on OpenShift 4.6.12.
+COPY --chown=docker:docker app app
 
 RUN Rscript --verbose --vanilla \
 	-e "sass::sass(sass::sass_file('app/styles/main.scss'), output = 'app/www/main.css')"
