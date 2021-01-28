@@ -10,6 +10,10 @@ RUN set -ex; \
 	; \
 	find /var/lib/apt/lists -type f -delete;
 
+ADD RCACOL01-CA-3.crt /usr/local/share/ca-certificates
+
+RUN update-ca-certificates
+
 USER docker
 
 RUN Rscript --verbose --vanilla \
